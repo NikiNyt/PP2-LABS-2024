@@ -104,7 +104,7 @@ pygame.time.set_timer(INC_SPEED, 1000)
 Score = 0
 #Game Loop
 while True:
-       
+    timer = pygame.time.get_ticks()   
     #Cycles through all events occuring  
     for event in pygame.event.get():
         if event.type == INC_SPEED:
@@ -136,8 +136,14 @@ while True:
     if pygame.sprite.spritecollideany(P1, coins):
         for entity in coins:
             Score +=1
-            entity.rect.center = (random.randint(40,SCREEN_WIDTH-40), 520)
+            ctimer = pygame.time.get_ticks()
+            entity.rect.center = (1000, 0) 
+
+    if timer > ctimer + 3000 and timer < ctimer + 3020:
+        for entity in coins:
+            entity.rect.center = (random.randint(40,SCREEN_WIDTH-40), 520) 
+            
     Your_score(Score)
-         
+    print(ctimer)
     pygame.display.update()
     FramePerSec.tick(FPS)
